@@ -1,9 +1,19 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     id("androidx.room")
     id("kotlin-kapt")
+}
+
+val localProps = Properties()
+val localPropertiesFile = File(rootProject.rootDir,"local.properties")
+if (localPropertiesFile.exists() && localPropertiesFile.isFile) {
+    localPropertiesFile.inputStream().use {
+        localProps.load(it)
+    }
 }
 
 android {
@@ -17,16 +27,25 @@ android {
         versionCode = 1
         versionName = "1.0"
 
+
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "BASE_URL", "\"https://api.openweathermap.org/\"")
+            buildConfigField("String", "API_KEY", localProps.getProperty("API_KEY"))
+
+        }
         release {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL", "\"https://api.openweathermap.org/\"")
+            buildConfigField("String", "API_KEY", localProps.getProperty("API_KEY"))
+
         }
     }
     compileOptions {
@@ -38,6 +57,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     room {
