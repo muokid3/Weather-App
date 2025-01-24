@@ -24,8 +24,11 @@ class WeatherRepositoryImpl(
     ): Flow<Resource<CurrentWeatherData>> = flow {
 
         //get whatever is stored locally and emit
-        val currentWeatherData = weatherDao.getCurrentWeatherData().toCurrentWeatherData()
-        emit(Resource.Success(currentWeatherData))
+
+        weatherDao.getCurrentWeatherData()?.let { currentWeatherdataEntity ->
+            emit(Resource.Success(currentWeatherdataEntity.toCurrentWeatherData()))
+        }
+
 
         //call api and update whatever is stored locally then emit again. Flows are beautiful!
         try {
@@ -58,7 +61,7 @@ class WeatherRepositoryImpl(
             emit(Resource.Error(errorMessage))
         } catch (e: IOException) {
             Log.e("ERRORIO:", e.message ?: "no message")
-            emit(Resource.Error("Unable to reach server, please check your internet connection and try again later."))
+            emit(Resource.Error("Unable to reach server, check internet connection"))
         }
     }
 }

@@ -36,6 +36,7 @@ data class CurrentWeatherDataEntity(
             pressure = pressure,
             windSpeed = wind_speed,
             humidity = humidity,
+            locationName = name,
             weatherType = WeatherType.fromCodeToWeatherType(weather_icon).apply {
                 weatherTypeName = weather_name
                 weatherTypeDesc = weather_description

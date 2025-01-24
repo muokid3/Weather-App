@@ -10,5 +10,6 @@ data class CurrentWeatherData(
     val pressure: Int,
     val windSpeed: Double,
     val humidity: Int,
+    val locationName: String,
     val weatherType: WeatherType
 )
