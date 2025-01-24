@@ -112,4 +112,7 @@ dependencies {
 
     // Extended Icons - Just nice icons from Google
     implementation(libs.androidx.material.icons.extended)
+
+    // Location Services
+    implementation (libs.play.services.location)
 }

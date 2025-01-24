@@ -3,9 +3,13 @@ package com.cs.dm.weatherapp.di
 import androidx.room.Room
 import com.cs.dm.weatherapp.BuildConfig
 import com.cs.dm.weatherapp.data.local.WeatherDatabase
+import com.cs.dm.weatherapp.data.location.LocationTrackerImpl
 import com.cs.dm.weatherapp.data.remote.WeatherApi
 import com.cs.dm.weatherapp.data.repository.WeatherRepositoryImpl
+import com.cs.dm.weatherapp.domain.location.LocationTracker
 import com.cs.dm.weatherapp.domain.respository.WeatherRepository
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
@@ -42,5 +46,10 @@ val AppModule = module {
     }
 
     single { get<WeatherDatabase>().weatherDao }
+
+    single<FusedLocationProviderClient> {
+        LocationServices.getFusedLocationProviderClient(androidContext())
+    }
     singleOf(::WeatherRepositoryImpl).bind<WeatherRepository>()
+    singleOf(::LocationTrackerImpl).bind<LocationTracker>()
 }
