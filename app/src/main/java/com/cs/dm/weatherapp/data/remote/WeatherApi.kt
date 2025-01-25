@@ -1,5 +1,6 @@
 package com.cs.dm.weatherapp.data.remote
 
+import com.cs.dm.weatherapp.data.remote.dtos.ForeCastDto
 import com.cs.dm.weatherapp.data.remote.dtos.WeatherDto
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -13,6 +14,15 @@ interface WeatherApi {
         @Query("appid") appid: String,
         @Query("units") units: String,
     ): WeatherDto
+
+
+    @GET("data/2.5/forecast")
+    suspend fun getForeCast(
+        @Query("lat") lat: Double,
+        @Query("lon") lon: Double,
+        @Query("appid") appid: String,
+        @Query("units") units: String,
+    ): ForeCastDto
 
 
 }

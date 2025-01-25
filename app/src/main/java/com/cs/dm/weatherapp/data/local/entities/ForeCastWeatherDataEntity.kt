@@ -4,36 +4,37 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.util.WeatherType
+import java.sql.Date
 import java.time.LocalDateTime
 import java.time.ZoneOffset
+import java.time.format.DateTimeFormatter
 
 @Entity
-data class WeatherDataEntity(
+data class ForeCastWeatherDataEntity (
     @PrimaryKey(autoGenerate = true)
-    val dt: Long,
-    val temp: Double,
-    val feels_like: Double,
-    val humidity: Int,
-    val pressure: Int,
-    val temp_max: Double,
-    val temp_min: Double,
-    val name: String,
-    val visibility: Int,
-    val timezone: Int,
-    val weather_description: String,
-    val weather_name: String,
-    val weather_icon: String,
-    val wind_speed: Double
-) {
+    var dt: Long,
+    var temp: Double,
+    var feels_like: Double,
+    var humidity: Int,
+    var pressure: Int,
+    var temp_max: Double,
+    var temp_min: Double,
+    var visibility: Int,
+    var weather_description: String,
+    var weather_name: String,
+    var weather_icon: String,
+    var wind_speed: Double,
+    var dt_txt: String
+){
     fun toWeatherData(): WeatherData {
         return WeatherData(
-            time = LocalDateTime.ofEpochSecond(dt, 0, ZoneOffset.ofTotalSeconds(timezone)),
+            time = LocalDateTime.parse(dt_txt,  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")),
             temperatureCelsius = temp,
             temperatureFeelsLikeCelsius = feels_like,
             pressure = pressure,
             windSpeed = wind_speed,
             humidity = humidity,
-            locationName = name,
+            locationName = "",
             weatherType = WeatherType.fromCodeToWeatherType(weather_icon).apply {
                 weatherTypeName = weather_name
                 weatherTypeDesc = weather_description

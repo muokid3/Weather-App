@@ -11,6 +11,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import java.time.Instant
 
 class WeatherViewModel(
     private val weatherRepository: WeatherRepository,
@@ -46,10 +47,10 @@ class WeatherViewModel(
                             _weatherState.update {
                                 it.copy(
                                     isLoading = false,
-                                    weatherData = result.data,
-
-                                    )
+                                    weatherData = result.data
+                                )
                             }
+                            loadForecast(lat = location.latitude, lon = location.longitude)
                         }
                     }
                 }
@@ -59,8 +60,41 @@ class WeatherViewModel(
                         isLoading = false,
                     )
                 }
-                val errorMsg = "Couldn't retrieve location. Make sure to grant permission and enable GPS."
+                val errorMsg =
+                    "Couldn't retrieve location. Make sure to grant permission and enable GPS."
                 _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
+            }
+        }
+    }
+
+    private fun loadForecast(lat: Double, lon: Double) {
+        viewModelScope.launch {
+
+            weatherRepository.getWeatherForecast(
+                lat = lat,
+                lon = lon
+            ).collect { result ->
+
+                when (result) {
+                    is Resource.Error -> {
+                        val errorMsg = result.message
+                            ?: "A fatal error occurred. Unable to load weather data"
+                        _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
+                    }
+
+                    is Resource.Success -> {
+                        _weatherState.update { state ->
+                            state.copy(
+                                forecastData = result.data?.map { foreCastWeatherDataEntity ->
+                                    foreCastWeatherDataEntity.toWeatherData()
+
+                                }?.groupBy { weatherData->
+                                    weatherData.time.toLocalDate().toString()
+                                }
+                            )
+                        }
+                    }
+                }
             }
         }
     }

@@ -40,7 +40,10 @@ fun HomeScreen(
                 backgroundColor = DeepBlue
             )
             Spacer(modifier = Modifier.height(16.dp))
-            //WeatherForecast(state = state)
+            WeatherForecast(state = state)
+            Spacer(modifier = Modifier.height(16.dp))
+
+
         }
         if (state.isLoading) {
             CircularProgressIndicator(
