@@ -1,8 +1,8 @@
 package com.cs.dm.weatherapp.data.remote.dtos
 
-import com.cs.dm.weatherapp.data.local.entities.CurrentWeatherDataEntity
+import com.cs.dm.weatherapp.data.local.entities.WeatherDataEntity
 
-data class CurrentWeatherDto(
+data class WeatherDto(
     val dt: Long,
     val main: Main,
     val name: String,
@@ -11,8 +11,8 @@ data class CurrentWeatherDto(
     val weather: List<Weather>,
     val wind: Wind
 ) {
-    fun toCurrentWeatherEntity(): CurrentWeatherDataEntity {
-        return CurrentWeatherDataEntity(
+    fun toCurrentWeatherEntity(): WeatherDataEntity {
+        return WeatherDataEntity(
             dt = dt,
             temp = main.temp,
             feels_like = main.feels_like,

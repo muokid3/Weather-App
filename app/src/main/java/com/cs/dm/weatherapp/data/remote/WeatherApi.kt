@@ -1,9 +1,7 @@
 package com.cs.dm.weatherapp.data.remote
 
-import com.cs.dm.weatherapp.data.remote.dtos.CurrentWeatherDto
+import com.cs.dm.weatherapp.data.remote.dtos.WeatherDto
 import retrofit2.http.GET
-import retrofit2.http.Headers
-import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface WeatherApi {
@@ -14,7 +12,7 @@ interface WeatherApi {
         @Query("lon") lon: Double,
         @Query("appid") appid: String,
         @Query("units") units: String,
-    ): CurrentWeatherDto
+    ): WeatherDto
 
 
 }

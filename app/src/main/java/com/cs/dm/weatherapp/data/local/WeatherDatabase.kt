@@ -2,10 +2,10 @@ package com.cs.dm.weatherapp.data.local
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import com.cs.dm.weatherapp.data.local.entities.CurrentWeatherDataEntity
+import com.cs.dm.weatherapp.data.local.entities.WeatherDataEntity
 
 @Database(
-    entities = [CurrentWeatherDataEntity::class],
+    entities = [WeatherDataEntity::class],
     version = 1
 )
 abstract class WeatherDatabase : RoomDatabase() {

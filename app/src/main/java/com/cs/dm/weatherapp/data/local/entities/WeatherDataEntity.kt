@@ -8,7 +8,7 @@ import java.time.LocalDateTime
 import java.time.ZoneOffset
 
 @Entity
-data class CurrentWeatherDataEntity(
+data class WeatherDataEntity(
     @PrimaryKey(autoGenerate = true)
     val dt: Long,
     val temp: Double,

@@ -4,18 +4,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.cs.dm.weatherapp.data.local.entities.CurrentWeatherDataEntity
+import com.cs.dm.weatherapp.data.local.entities.WeatherDataEntity
 
 @Dao
 interface WeatherDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertCurrentWeatherData(weatherDataEntity: CurrentWeatherDataEntity)
+    suspend fun insertCurrentWeatherData(weatherDataEntity: WeatherDataEntity)
 
-    @Query("SELECT * FROM CurrentWeatherDataEntity")
-    suspend fun getCurrentWeatherData(): CurrentWeatherDataEntity
+    @Query("SELECT * FROM WeatherDataEntity")
+    suspend fun getCurrentWeatherData(): WeatherDataEntity
 
-    @Query("DELETE FROM CurrentWeatherDataEntity")
+    @Query("DELETE FROM WeatherDataEntity")
     suspend fun deleteCurrentWeatherData()
 
 }
