@@ -31,39 +31,43 @@ class WeatherViewModel(
                 it.copy(isLoading = true)
             }
 
-            locationTracker.getCurrentLocation()?.let { location ->
-                weatherRepository.getCurrentWeatherData(
-                    lat = location.latitude,
-                    lon = location.longitude
-                ).collect { result ->
+            if (weatherState.value.selectedCity != null){
+                searchCityWeather(weatherState.value.selectedCity!!)
+            }else{
+                locationTracker.getCurrentLocation()?.let { location ->
+                    weatherRepository.getCurrentWeatherData(
+                        lat = location.latitude,
+                        lon = location.longitude
+                    ).collect { result ->
 
-                    when (result) {
-                        is Resource.Error -> {
-                            val errorMsg = result.message
-                                ?: "A fatal error occurred. Unable to load weather data"
-                            _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
-                        }
-
-                        is Resource.Success -> {
-                            _weatherState.update {
-                                it.copy(
-                                    isLoading = false,
-                                    weatherData = result.data
-                                )
+                        when (result) {
+                            is Resource.Error -> {
+                                val errorMsg = result.message
+                                    ?: "A fatal error occurred. Unable to load weather data"
+                                _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
                             }
-                            loadForecast(lat = location.latitude, lon = location.longitude)
+
+                            is Resource.Success -> {
+                                _weatherState.update {
+                                    it.copy(
+                                        isLoading = false,
+                                        weatherData = result.data
+                                    )
+                                }
+                                loadForecast(lat = location.latitude, lon = location.longitude)
+                            }
                         }
                     }
+                } ?: kotlin.run {
+                    _weatherState.update {
+                        it.copy(
+                            isLoading = false,
+                        )
+                    }
+                    val errorMsg =
+                        "Couldn't retrieve location. Make sure to grant permission and enable GPS."
+                    _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
                 }
-            } ?: kotlin.run {
-                _weatherState.update {
-                    it.copy(
-                        isLoading = false,
-                    )
-                }
-                val errorMsg =
-                    "Couldn't retrieve location. Make sure to grant permission and enable GPS."
-                _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
             }
         }
     }
@@ -151,7 +155,8 @@ class WeatherViewModel(
     fun searchCityWeather(searchCity: SearchCity) {
         viewModelScope.launch {
             _weatherState.update {
-                it.copy(isLoading = true)
+                it.copy(isLoading = true,
+                    selectedCity = searchCity)
             }
 
             weatherRepository.getCurrentWeatherData(
