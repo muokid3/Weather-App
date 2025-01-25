@@ -6,6 +6,7 @@ import com.cs.dm.weatherapp.data.local.WeatherDao
 import com.cs.dm.weatherapp.data.local.entities.ForeCastWeatherDataEntity
 import com.cs.dm.weatherapp.data.local.entities.WeatherDataEntity
 import com.cs.dm.weatherapp.data.remote.WeatherApi
+import com.cs.dm.weatherapp.domain.model.SearchCity
 import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.respository.WeatherRepository
 import com.cs.dm.weatherapp.domain.util.Resource
@@ -92,6 +93,36 @@ class WeatherRepositoryImpl(
             weatherDao.getWeatherForecast()?.let { weatherForeCast ->
                 emit(Resource.Success(weatherForeCast))
             }
+        } catch (e: HttpException) {
+            val errorBody = e.response()?.errorBody()?.string()
+            val errorMessage = if (errorBody.isNullOrEmpty()) {
+                e.message()
+            } else {
+                try {
+                    val errorJson = JSONObject(errorBody)
+                    errorJson.getString("message")
+                } catch (e: Exception) {
+                    // Fallback if parsing fails
+                    "A fatal server error occurred. Please try again later"
+                }
+            }
+            emit(Resource.Error(errorMessage))
+        } catch (e: IOException) {
+            Log.e("ERRORIO:", e.message ?: "no message")
+            emit(Resource.Error("Unable to reach server, check internet connection"))
+        }
+    }
+
+    override suspend fun searchCity(searchQuery: String): Flow<Resource<List<SearchCity>>> = flow {
+        try {
+            val cities = weatherApi.searchCity(
+                searchQuery = searchQuery,
+                limit = 5,
+                appid = BuildConfig.API_KEY,
+            )
+
+            emit(Resource.Success(cities.map { it.toSearchCity() }))
+
         } catch (e: HttpException) {
             val errorBody = e.response()?.errorBody()?.string()
             val errorMessage = if (errorBody.isNullOrEmpty()) {

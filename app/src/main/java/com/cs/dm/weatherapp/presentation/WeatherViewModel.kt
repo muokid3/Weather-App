@@ -3,6 +3,7 @@ package com.cs.dm.weatherapp.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cs.dm.weatherapp.domain.location.LocationTracker
+import com.cs.dm.weatherapp.domain.model.SearchCity
 import com.cs.dm.weatherapp.domain.respository.WeatherRepository
 import com.cs.dm.weatherapp.domain.util.Resource
 import kotlinx.coroutines.channels.Channel
@@ -88,7 +89,7 @@ class WeatherViewModel(
                                 forecastData = result.data?.map { foreCastWeatherDataEntity ->
                                     foreCastWeatherDataEntity.toWeatherData()
 
-                                }?.groupBy { weatherData->
+                                }?.groupBy { weatherData ->
                                     weatherData.time.toLocalDate().toString()
                                 }
                             )
@@ -96,6 +97,87 @@ class WeatherViewModel(
                     }
                 }
             }
+        }
+    }
+
+    fun searchCity(searchQuery: String) {
+        _weatherState.update {
+            it.copy(isSearching = true)
+        }
+
+        viewModelScope.launch {
+            weatherRepository.searchCity(searchQuery).collect { result ->
+
+                when (result) {
+                    is Resource.Error -> {
+                        _weatherState.update {
+                            it.copy(isSearching = false)
+                        }
+                        val errorMsg = result.message
+                            ?: "A fatal error occurred. Unable to search cities"
+                        _weatherState.update { it.copy(searchCities = emptyList(), searchError = errorMsg) }
+                    }
+
+                    is Resource.Success -> {
+
+                        result.data?.let {
+                            _weatherState.update {
+                                it.copy(
+                                    isSearching = false,
+                                    searchCities = result.data,
+                                    searchError = if (result.data.isEmpty()) "We couldn't find a city with that name. Please try a different city" else null
+                                )
+                            }
+                        } ?: {
+                            _weatherState.update {
+                                it.copy(
+                                    isSearching = false,
+                                    searchCities = emptyList(),
+                                    searchError = "We couldn't find a city with that name. Please try a different city"
+                                )
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
+    fun clearSearchCity() {
+        _weatherState.update { it.copy(searchCities = emptyList(), searchError = null) }
+    }
+
+    fun searchCityWeather(searchCity: SearchCity) {
+        viewModelScope.launch {
+            _weatherState.update {
+                it.copy(isLoading = true)
+            }
+
+            weatherRepository.getCurrentWeatherData(
+                lat = searchCity.lat,
+                lon = searchCity.lon
+            ).collect { result ->
+
+                when (result) {
+                    is Resource.Error -> {
+                        val errorMsg = result.message
+                            ?: "A fatal error occurred. Unable to load weather data"
+                        _channelEvents.send(WeatherEvents.ShowSnack(message = errorMsg))
+                    }
+
+                    is Resource.Success -> {
+                        _weatherState.update {
+                            it.copy(
+                                isLoading = false,
+                                weatherData = result.data
+                            )
+                        }
+                        loadForecast(lat = searchCity.lat, lon = searchCity.lon)
+                    }
+                }
+            }
+
         }
     }
 

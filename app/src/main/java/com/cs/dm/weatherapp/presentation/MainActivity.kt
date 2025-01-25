@@ -79,6 +79,9 @@ class MainActivity : ComponentActivity() {
                             .fillMaxSize()
                             .padding(innerPadding),
                         state = state,
+                        onSearchCity = viewModel::searchCity,
+                        onSearchWeather = viewModel::searchCityWeather,
+                        clearSearchCity = viewModel::clearSearchCity
                     )
                 }
             }
