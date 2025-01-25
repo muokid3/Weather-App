@@ -103,13 +103,11 @@ fun WeatherCard(
                         )
                     }
                 }
-                Spacer(modifier = Modifier.height(16.dp))
                 Image(
                     painter = painterResource(id = data.weatherType.iconRes),
                     contentDescription = null,
                     modifier = Modifier.size(100.dp)
                 )
-                Spacer(modifier = Modifier.height(16.dp))
                 Text(
                     text = "${data.temperatureCelsius}°C",
                     fontSize = 50.sp,
