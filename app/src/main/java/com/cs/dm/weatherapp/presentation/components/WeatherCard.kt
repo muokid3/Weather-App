@@ -87,14 +87,21 @@ fun WeatherCard(
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
-                    Text(
-                        text = "Today ${
-                            data.time.format(
-                                DateTimeFormatter.ofPattern("HH:mm")
-                            )
-                        }",
-                        color = Color.White
-                    )
+
+                    Column(
+                        verticalArrangement = Arrangement.Center
+                    ) {
+                        Text(
+                            text = "Last Updated",
+                            color = Color.White
+                        )
+                        Text(
+                            text = data.time.format(
+                                DateTimeFormatter.ofPattern("EEE dd MMM HH:mm")
+                            ),
+                            color = Color.White
+                        )
+                    }
                 }
                 Spacer(modifier = Modifier.height(16.dp))
                 Image(
@@ -109,7 +116,7 @@ fun WeatherCard(
                     color = Color.White
                 )
                 Text(
-                    text = "Feels  like ${data.temperatureFeelsLikeCelsius}°C" ,
+                    text = "Feels  like ${data.temperatureFeelsLikeCelsius}°C",
                     fontSize = 16.sp,
                     color = Color.White,
                     fontStyle = FontStyle.Italic
