@@ -46,7 +46,7 @@ class WeatherViewModel(
                             _weatherState.update {
                                 it.copy(
                                     isLoading = false,
-                                    currentWeatherData = result.data,
+                                    weatherData = result.data,
 
                                     )
                             }

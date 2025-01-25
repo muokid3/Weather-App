@@ -20,7 +20,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -30,12 +29,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.cs.dm.weatherapp.R
-import com.cs.dm.weatherapp.domain.model.CurrentWeatherData
+import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.util.WeatherType
 import com.cs.dm.weatherapp.presentation.WeatherState
 import com.cs.dm.weatherapp.presentation.ui.theme.DeepBlue
@@ -49,7 +47,7 @@ fun WeatherCard(
     backgroundColor: Color,
     modifier: Modifier = Modifier
 ) {
-    state.currentWeatherData?.let { data ->
+    state.weatherData?.let { data ->
         Card(
             colors = CardColors(
                 containerColor = backgroundColor,
@@ -82,7 +80,7 @@ fun WeatherCard(
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
-                            text = state.currentWeatherData.locationName,
+                            text = state.weatherData.locationName,
                             color = Color.White
                         )
                     }
@@ -163,7 +161,7 @@ private fun PrevCurrentWeatherData() {
     WeatherCard(
         state = WeatherState(
             isLoading = false,
-            currentWeatherData = CurrentWeatherData(
+            weatherData = WeatherData(
                 time = LocalDateTime.now(),
                 temperatureCelsius = 20.5,
                 pressure = 700,

@@ -3,7 +3,7 @@ package com.cs.dm.weatherapp.domain.model
 import com.cs.dm.weatherapp.domain.util.WeatherType
 import java.time.LocalDateTime
 
-data class CurrentWeatherData(
+data class WeatherData(
     val time: LocalDateTime,
     val temperatureCelsius: Double,
     val temperatureFeelsLikeCelsius: Double,

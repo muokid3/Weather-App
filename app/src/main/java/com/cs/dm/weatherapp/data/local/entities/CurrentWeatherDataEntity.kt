@@ -2,10 +2,7 @@ package com.cs.dm.weatherapp.data.local.entities
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.cs.dm.weatherapp.data.remote.dtos.Main
-import com.cs.dm.weatherapp.data.remote.dtos.Weather
-import com.cs.dm.weatherapp.data.remote.dtos.Wind
-import com.cs.dm.weatherapp.domain.model.CurrentWeatherData
+import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.util.WeatherType
 import java.time.LocalDateTime
 import java.time.ZoneOffset
@@ -28,8 +25,8 @@ data class CurrentWeatherDataEntity(
     val weather_icon: String,
     val wind_speed: Double
 ) {
-    fun toCurrentWeatherData(): CurrentWeatherData {
-        return CurrentWeatherData(
+    fun toCurrentWeatherData(): WeatherData {
+        return WeatherData(
             time = LocalDateTime.ofEpochSecond(dt, 0, ZoneOffset.ofTotalSeconds(timezone)),
             temperatureCelsius = temp,
             temperatureFeelsLikeCelsius = feels_like,

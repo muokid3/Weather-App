@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.cs.dm.weatherapp.domain.model.CurrentWeatherData
+import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.util.WeatherType
 import com.cs.dm.weatherapp.presentation.components.WeatherCard
 import com.cs.dm.weatherapp.presentation.ui.theme.DarkBlue
@@ -61,7 +61,7 @@ private fun HomePrev() {
             .fillMaxSize(),
         state = WeatherState(
             isLoading = false,
-            currentWeatherData = CurrentWeatherData(
+            weatherData = WeatherData(
                 time = LocalDateTime.now(),
                 temperatureCelsius = 20.5,
                 pressure = 700,

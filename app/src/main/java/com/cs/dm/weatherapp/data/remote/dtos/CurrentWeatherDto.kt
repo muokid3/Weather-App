@@ -1,10 +1,6 @@
 package com.cs.dm.weatherapp.data.remote.dtos
 
 import com.cs.dm.weatherapp.data.local.entities.CurrentWeatherDataEntity
-import com.cs.dm.weatherapp.domain.model.CurrentWeatherData
-import com.cs.dm.weatherapp.domain.util.WeatherType
-import java.time.LocalDateTime
-import java.time.ZoneOffset
 
 data class CurrentWeatherDto(
     val dt: Long,

@@ -4,10 +4,9 @@ import android.util.Log
 import com.cs.dm.weatherapp.BuildConfig
 import com.cs.dm.weatherapp.data.local.WeatherDao
 import com.cs.dm.weatherapp.data.remote.WeatherApi
-import com.cs.dm.weatherapp.domain.model.CurrentWeatherData
+import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.respository.WeatherRepository
 import com.cs.dm.weatherapp.domain.util.Resource
-import com.google.gson.reflect.TypeToken
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import org.json.JSONObject
@@ -21,7 +20,7 @@ class WeatherRepositoryImpl(
     override suspend fun getCurrentWeatherData(
         lat: Double,
         lon: Double
-    ): Flow<Resource<CurrentWeatherData>> = flow {
+    ): Flow<Resource<WeatherData>> = flow {
 
         //get whatever is stored locally and emit
 

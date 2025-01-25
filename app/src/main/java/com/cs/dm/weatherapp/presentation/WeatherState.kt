@@ -1,8 +1,8 @@
 package com.cs.dm.weatherapp.presentation
 
-import com.cs.dm.weatherapp.domain.model.CurrentWeatherData
+import com.cs.dm.weatherapp.domain.model.WeatherData
 
 data class WeatherState(
-    val currentWeatherData: CurrentWeatherData? = null,
+    val weatherData: WeatherData? = null,
     val isLoading: Boolean = false,
 )
