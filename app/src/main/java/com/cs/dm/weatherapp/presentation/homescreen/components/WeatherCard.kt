@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Air
 import androidx.compose.material.icons.filled.LocationOn
+import androidx.compose.material.icons.filled.ThermostatAuto
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardColors
 import androidx.compose.material3.CardDefaults
@@ -126,7 +127,7 @@ fun WeatherCard(
                     WeatherDataDisplay(
                         value = data.pressure,
                         unit = "hpa",
-                        icon = Icons.Default.Air,
+                        icon = Icons.Default.ThermostatAuto,
                         //iconTint = Color.White,
                         //textStyle = TextStyle(color = Color.White)
                     )
