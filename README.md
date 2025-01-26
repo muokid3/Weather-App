@@ -1,8 +1,8 @@
 **Offline First Weather App**
 
-This is an offline-first weather app. Pulls weather information from [[openweathermap API](http://api.openweathermap.org/data/2.5/)]
+This is an offline-first weather app. You can see weather details for your current location if you allow location permissions, otherwise you can search weather details for any city in the world. Pulls weather information from [[openweathermap API](http://api.openweathermap.org/data/2.5/)]
 
-UI inspiration: Samsung's weather app and <a target="_blank" href="https://dribbble.com/shots/17998271-Cuacane-Weather-App?utm_source=Clipboard_Shot&utm_campaign=mochamadhakim&utm_content=Cuacane%20-%20Weather%20App&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=mochamadhakim&utm_content=Cuacane%20-%20Weather%20App&utm_medium=Social_Share">this free design</a>
+UI inspiration: Samsung's weather app and <a href="https://dribbble.com/shots/17998271-Cuacane-Weather-App?utm_source=Clipboard_Shot&utm_campaign=mochamadhakim&utm_content=Cuacane%20-%20Weather%20App&utm_medium=Social_Share&utm_source=Clipboard_Shot&utm_campaign=mochamadhakim&utm_content=Cuacane%20-%20Weather%20App&utm_medium=Social_Share">this free design</a>
 
 How to run it:
 1. Clone the repository to your android studio
