@@ -8,7 +8,7 @@ import com.cs.dm.weatherapp.data.remote.WeatherApi
 import com.cs.dm.weatherapp.data.repository.WeatherRepositoryImpl
 import com.cs.dm.weatherapp.domain.location.LocationTracker
 import com.cs.dm.weatherapp.domain.respository.WeatherRepository
-import com.cs.dm.weatherapp.presentation.WeatherViewModel
+import com.cs.dm.weatherapp.presentation.homescreen.WeatherViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import okhttp3.OkHttpClient

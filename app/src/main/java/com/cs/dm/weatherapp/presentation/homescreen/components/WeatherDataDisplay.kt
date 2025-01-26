@@ -1,4 +1,4 @@
-package com.cs.dm.weatherapp.presentation.components
+package com.cs.dm.weatherapp.presentation.homescreen.components
 
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -21,7 +21,7 @@ fun WeatherDataDisplay(
     icon: ImageVector,
     modifier: Modifier = Modifier,
     textStyle: TextStyle = TextStyle(),
-    iconTint: Color = Color.White
+    //iconTint: Color = Color.White
 ) {
     Row(
         modifier = modifier,
@@ -30,7 +30,7 @@ fun WeatherDataDisplay(
         Icon(
             imageVector = icon,
             contentDescription = null,
-            tint = iconTint,
+            //tint = iconTint,
             modifier = Modifier.size(25.dp)
         )
         Spacer(modifier = Modifier.width(4.dp))

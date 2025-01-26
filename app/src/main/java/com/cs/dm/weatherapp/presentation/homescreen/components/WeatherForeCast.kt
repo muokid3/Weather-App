@@ -1,5 +1,6 @@
-package com.cs.dm.weatherapp.presentation.components
+package com.cs.dm.weatherapp.presentation.homescreen.components
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,7 +16,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.cs.dm.weatherapp.presentation.WeatherState
+import com.cs.dm.weatherapp.presentation.homescreen.WeatherState
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
@@ -45,6 +46,7 @@ fun WeatherForecast(
                             modifier = Modifier
                                 .height(100.dp)
                                 .padding(horizontal = 16.dp)
+
                         )
                     }
                 })

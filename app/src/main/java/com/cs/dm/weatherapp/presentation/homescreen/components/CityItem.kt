@@ -1,4 +1,4 @@
-package com.cs.dm.weatherapp.presentation.components
+package com.cs.dm.weatherapp.presentation.homescreen.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

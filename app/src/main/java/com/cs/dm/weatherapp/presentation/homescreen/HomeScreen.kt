@@ -1,4 +1,4 @@
-package com.cs.dm.weatherapp.presentation
+package com.cs.dm.weatherapp.presentation.homescreen
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -26,7 +26,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -36,11 +35,9 @@ import androidx.compose.ui.unit.dp
 import com.cs.dm.weatherapp.domain.model.SearchCity
 import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.util.WeatherType
-import com.cs.dm.weatherapp.presentation.components.CityItem
-import com.cs.dm.weatherapp.presentation.components.WeatherCard
-import com.cs.dm.weatherapp.presentation.components.WeatherForecast
-import com.cs.dm.weatherapp.presentation.ui.theme.DarkBlue
-import com.cs.dm.weatherapp.presentation.ui.theme.DeepBlue
+import com.cs.dm.weatherapp.presentation.homescreen.components.CityItem
+import com.cs.dm.weatherapp.presentation.homescreen.components.WeatherCard
+import com.cs.dm.weatherapp.presentation.homescreen.components.WeatherForecast
 import java.time.LocalDateTime
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -56,7 +53,8 @@ fun HomeScreen(
     var text by rememberSaveable { mutableStateOf("") }
     var active by rememberSaveable { mutableStateOf(false) }
 
-    Column(modifier = Modifier.background(DarkBlue)) {
+//    Column(modifier = Modifier.background(DarkBlue)) {
+    Column {
         SearchBar(
             modifier = Modifier
                 .fillMaxWidth()
@@ -136,7 +134,7 @@ fun HomeScreen(
                     .verticalScroll(rememberScrollState())
             ) {
                 WeatherCard(
-                    state = state, backgroundColor = DeepBlue
+                    state = state
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 WeatherForecast(state = state)
@@ -162,7 +160,8 @@ private fun HomePrev() {
     HomeScreen(
         modifier = Modifier.fillMaxSize(),
         state = WeatherState(
-            isLoading = false, weatherData = WeatherData(
+            isLoading = false,
+            weatherData = WeatherData(
                 time = LocalDateTime.now(),
                 temperatureCelsius = 20.5,
                 pressure = 700,

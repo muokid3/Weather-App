@@ -1,6 +1,5 @@
-package com.cs.dm.weatherapp.presentation
+package com.cs.dm.weatherapp.presentation.homescreen
 
-import com.cs.dm.weatherapp.data.remote.dtos.SearchCityDto
 import com.cs.dm.weatherapp.domain.model.SearchCity
 import com.cs.dm.weatherapp.domain.model.WeatherData
 

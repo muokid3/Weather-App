@@ -1,4 +1,4 @@
-package com.cs.dm.weatherapp.presentation
+package com.cs.dm.weatherapp.presentation.homescreen
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import java.time.Instant
 
 class WeatherViewModel(
     private val weatherRepository: WeatherRepository,
@@ -149,7 +148,7 @@ class WeatherViewModel(
     }
 
     fun clearSearchCity() {
-        _weatherState.update { it.copy(searchCities = emptyList(), searchError = null) }
+        _weatherState.update { it.copy(searchCities = emptyList(), searchError = null, selectedCity = null) }
     }
 
     fun searchCityWeather(searchCity: SearchCity) {

@@ -19,7 +19,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.repeatOnLifecycle
-import com.cs.dm.weatherapp.presentation.ui.theme.WeatherAppTheme
+import com.cs.dm.weatherapp.presentation.homescreen.HomeScreen
+import com.cs.dm.weatherapp.presentation.homescreen.WeatherEvents
+import com.cs.dm.weatherapp.presentation.homescreen.WeatherViewModel
+import com.example.compose.AppTheme
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.koin.androidx.viewmodel.ext.android.getViewModel
@@ -49,7 +52,7 @@ class MainActivity : ComponentActivity() {
 
         enableEdgeToEdge()
         setContent {
-            WeatherAppTheme {
+            AppTheme {
 
                 val state = viewModel.weatherState.collectAsStateWithLifecycle().value
                 val snackBarHostState = remember { SnackbarHostState() }
@@ -72,7 +75,6 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
                         }
-
                     }
                     HomeScreen(
                         modifier = Modifier
