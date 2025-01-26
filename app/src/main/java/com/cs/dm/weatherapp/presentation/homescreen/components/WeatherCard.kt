@@ -15,23 +15,16 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Air
 import androidx.compose.material.icons.filled.LocationOn
 import androidx.compose.material.icons.filled.ThermostatAuto
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardColors
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.vectorResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -72,12 +65,10 @@ fun WeatherCard(
                         Icon(
                             imageVector = Icons.Default.LocationOn,
                             contentDescription = null,
-                            // tint = Color.White
                         )
                         Spacer(modifier = Modifier.width(5.dp))
                         Text(
                             text = state.weatherData.locationName,
-                            // color = Color.White
                         )
                     }
                     Spacer(modifier = Modifier.weight(1f))
@@ -87,13 +78,11 @@ fun WeatherCard(
                     ) {
                         Text(
                             text = "Last Updated",
-                            //color = Color.White
                         )
                         Text(
                             text = data.time.format(
                                 DateTimeFormatter.ofPattern("EEE dd MMM HH:mm")
                             ),
-                            //color = Color.White
                         )
                     }
                 }
@@ -105,19 +94,16 @@ fun WeatherCard(
                 Text(
                     text = "${data.temperatureCelsius}°C",
                     fontSize = 50.sp,
-                    //color = Color.White
                 )
                 Text(
                     text = "Feels  like ${data.temperatureFeelsLikeCelsius}°C",
                     fontSize = 16.sp,
-                    //color = Color.White,
                     fontStyle = FontStyle.Italic
                 )
                 Spacer(modifier = Modifier.height(20.dp))
                 Text(
                     text = data.weatherType.weatherTypeDesc ?: "--",
                     fontSize = 20.sp,
-                    //color = Color.White
                 )
                 Spacer(modifier = Modifier.height(32.dp))
                 Row(
@@ -128,22 +114,16 @@ fun WeatherCard(
                         value = data.pressure,
                         unit = "hpa",
                         icon = Icons.Default.ThermostatAuto,
-                        //iconTint = Color.White,
-                        //textStyle = TextStyle(color = Color.White)
                     )
                     WeatherDataDisplay(
                         value = data.humidity,
                         unit = "%",
                         icon = ImageVector.vectorResource(id = R.drawable.ic_humidity),
-                        //iconTint = Color.White,
-                        //textStyle = TextStyle(color = Color.White)
                     )
                     WeatherDataDisplay(
                         value = data.windSpeed.roundToInt(),
                         unit = "km/h",
                         icon = Icons.Default.Air,
-                        //iconTint = Color.White,
-                        //textStyle = TextStyle(color = Color.White)
                     )
                 }
             }

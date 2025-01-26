@@ -4,7 +4,6 @@ import android.util.Log
 import com.cs.dm.weatherapp.BuildConfig
 import com.cs.dm.weatherapp.data.local.WeatherDao
 import com.cs.dm.weatherapp.data.local.entities.ForeCastWeatherDataEntity
-import com.cs.dm.weatherapp.data.local.entities.WeatherDataEntity
 import com.cs.dm.weatherapp.data.remote.WeatherApi
 import com.cs.dm.weatherapp.domain.model.SearchCity
 import com.cs.dm.weatherapp.domain.model.WeatherData

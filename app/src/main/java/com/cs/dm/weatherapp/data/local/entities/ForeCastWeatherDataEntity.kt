@@ -4,9 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.cs.dm.weatherapp.domain.model.WeatherData
 import com.cs.dm.weatherapp.domain.util.WeatherType
-import java.sql.Date
 import java.time.LocalDateTime
-import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
 
 @Entity
